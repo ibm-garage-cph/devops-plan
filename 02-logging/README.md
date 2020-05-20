@@ -68,7 +68,9 @@ Can you find logs from the bookinfo app itself?
 ## More logging from bookinfo prodictpage
 We have provided a productpage image that is a bit more informative.
 
-Find your deployment for productpage and replace with this image: `docker.io/jebn/productpage-log`
+Find your deployment for productpage and replace with this image: `docker.io/jebn/productpage-log`.
+
+Ensure the new image is deployed....
 
 Check the logs and see how it flows to logDNA as well.
 
