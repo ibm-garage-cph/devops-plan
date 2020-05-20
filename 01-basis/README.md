@@ -62,6 +62,10 @@ The files to setup the project are found in this folder.
 What do you need to change before applying:
 ```
 oc new-project bookinfo-$INITIALS
+
+oc get secrets default-icr-io  -n default --export -o yaml | oc apply -f -
+oc patch serviceaccount default -p '{"imagePullSecrets": [{"name": "default-icr-io"}]}'
+
 oc label namespace bookinfo-$INITIALS istio-injection=enabled
 git clone https://github.com/ibm-garage-cph/devops-plan.git
 cd devops-plan/01-basis
