@@ -64,7 +64,7 @@ You may also look for the HTTP views.
 Go back to the golden signals and generate some load....
 
 ```
-for i in {1..100}; do sleep 0.1; curl $INGRESS_HOST/$INITIALS/productpage; done
+for i in {1..100}; do sleep 0.1; curl bookinfo-$INITIALS.$INGRESS_SUBDOMAIN/productpage; done
 ```
 
 for i in {1..100}; do sleep 0.1; curl 127.0.0.1:9080/productpage; done
