@@ -6,8 +6,8 @@ First a few tips.
 ## Tips
 
 1. Have a good editor. We recommend [Visual Studio Code](https://code.visualstudio.com/)
-2. You might want to store your own notes and various keys etc. We recommend to do so in a .secret file - this file is ignored via the `.gitignore` file, just to ensure it does not get uploaded to git!
-3. You might want to store your own environment variabke values. We recommend to do so in a .env file - this file is ignored via the `.gitignore` file, just to ensure it does not get uploaded to git!
+2. You might want to store your own notes and various keys etc. We recommend to do so in a .secret file - this file is ignored via the `.gitignore` file, just to ensure it does not get uploaded to git! (For windows we have also ignored `secret*`)
+3. You might want to store your own environment variabke values. We recommend to do so in a .env file - this file is ignored via the `.gitignore` file, just to ensure it does not get uploaded to git! (For windows we have also ignored `env*`)
 
 ## Logins
 
@@ -55,30 +55,34 @@ In case you have projects (namespaces) from earlier, time to suggest to cleanup.
 You can list projects with `oc projects` (you can also use the web...).
 Projects are deleted with `oc delete project <project_name>`.
 
-## Setup the bookinfo with your own fqdn (maybe)
+## Setup the bookinfo now also with your own fqdn
 Previously you had a bookinfo url that was based on a path like `http://hostname.domain/bookinfo-<xx>/productpage`. Now you should set it up via your own Fully Qualified Domain Name (fqdn). With the format of `bookinfo-$INITIALS.$INGRESS_DOMAIN`.
 
 The files to setup the project are found in this folder.
-What do you need to change before applying:
+What do you need to change before applying below? (Hint: Check before doing each command and reflect on what does each line actually do for the project? Is there anything you need to change before running the command? Are environment variables interpreted inside yaml files?)
 ```
+git clone https://github.com/ibm-garage-cph/devops-plan.git
+cd devops-plan/01-basis
+
 oc new-project bookinfo-$INITIALS
 
 oc get secrets default-icr-io  -n default --export -o yaml | oc apply -f -
 oc patch serviceaccount default -p '{"imagePullSecrets": [{"name": "default-icr-io"}]}'
 
 oc label namespace bookinfo-$INITIALS istio-injection=enabled
-git clone https://github.com/ibm-garage-cph/devops-plan.git
-cd devops-plan/01-basis
+
 oc apply -f bookinfo.yaml
-oc apply -f bookinfo-gateway.yaml
+# oc apply -f bookinfo-gateway.yaml   # This is how you used to set it up in previous bootcamp
+oc apply -f bookinfo-gateway-own-fqdn.yaml
 oc apply -f destination-rule-all.yaml
+
 oc get pods
-
-
 ```
 (be inspired by https://github.com/ibm-garage-cph/istio-roks-101/tree/master/workshop/exercise-3 and exercise-4 but not beyond)
 
 Now look for the productpage webpage. Where do you find it?
+
+FYI: The reason it sets up its own unique FQDN is due to a change in the istio-config now set to [automatic route creation](https://docs.openshift.com/container-platform/4.3/service_mesh/service_mesh_day_two/ossm-auto-route.html).
 
 ## Explore logs
 Via `oc logs` ,  `kubectl logs` or via console.
@@ -98,6 +102,6 @@ What port is the productpage available on via the productpage service? (look in 
 Get the productpage available via the service locally on your desktop. Use:
 `oc port-forward service/productpage xxxx:yyyy`
 
-Open a web browser to localhost:yyyy... what do you see there?
-Try /health....
+Open a web browser to localhost:xxxx ... what do you see there?
+Try /health ...
 
