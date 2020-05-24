@@ -9,7 +9,7 @@ First a few tips.
 2. You might want to store your own notes and various keys etc. We recommend to do so in a .secret file - this file is ignored via the `.gitignore` file, just to ensure it does not get uploaded to git! (For windows we have also ignored `secret*`)
 3. You might want to store your own environment variabke values. We recommend to do so in a .env file - this file is ignored via the `.gitignore` file, just to ensure it does not get uploaded to git! (For windows we have also ignored `env*`)
 
-## Logins
+## Loging in
 
 Ensure to login to IBM cloud both from [web](https://cloud.ibm.com) and command line.
 
@@ -18,7 +18,7 @@ both web and command line too.
 
 Look at the material from before, or ask a fellow student in case you need a memory recall :-)
 
-Success ensure you can do `oc get nodes` like below example:
+When logged-in, ensure you can do `oc get nodes` like in the example below:
 ```bash
 $ oc get nodes
 NAME             STATUS   ROLES           AGE   VERSION
@@ -27,22 +27,24 @@ NAME             STATUS   ROLES           AGE   VERSION
 10.215.133.230   Ready    master,worker   22d   v1.16.2
 ```
 
-## Get the ingress domain
+## Get the Ingress domain
 All URLs in the rest of the bootcamp relates to the ingress domain of the ROKS cluster. Suggest to extract it and store it in your `.env` file.
 You can find it with `ic ks cluster get -c roks-bootcamp`
 
 Suggest to fill enviromment variable `INGRESS_SUBDOMAIN` with the value like:
-```
+
+```bash
 export INGRESS_SUBDOMAIN="xxxxxx.eu-de.containers.appdomain.cloud"
 
 echo "INGRESS_SUBDOMAIN=$INGRESS_SUBDOMAIN" >> .env
 ```
+
 The above is for linux and mac. For windows use SET .....
 
 ## Save your INITIALS
-If you want tu se variables to make some of the steps later easier we recommend to stor your iniails both in the .env file and in your environment variables.
+If you want tu se variables to make some of the steps later easier we recommend to store your iniails both in the .env file and in your environment variables.
 
-```
+```bash
 export INITIALS="<CHANGE THIS>"
 
 echo "INITIALS=$INITIALS" >> .env
@@ -50,9 +52,10 @@ echo "INITIALS=$INITIALS" >> .env
 
 ## Cleanup your projects from before if needed
 
-In case you have projects (namespaces) from earlier, time to suggest to cleanup. Especially the bookinfo-<id> project.
+In case you have projects (namespaces) from earlier, it's time to suggest a cleanup. Especially the bookinfo-<id> project.
 
-You can list projects with `oc projects` (you can also use the web...).
+You can list projects with `oc projects` (but you can also use the web console).
+
 Projects are deleted with `oc delete project <project_name>`.
 
 ## Setup the bookinfo now also with your own fqdn
@@ -78,6 +81,7 @@ oc apply -f destination-rule-all.yaml
 
 oc get pods
 ```
+
 (be inspired by https://github.com/ibm-garage-cph/istio-roks-101/tree/master/workshop/exercise-3 and exercise-4 but not beyond)
 
 Now look for the productpage webpage. Where do you find it?
@@ -85,19 +89,20 @@ Now look for the productpage webpage. Where do you find it?
 FYI: The reason it sets up its own unique FQDN is due to a change in the istio-config now set to [automatic route creation](https://docs.openshift.com/container-platform/4.3/service_mesh/service_mesh_day_two/ossm-auto-route.html).
 
 ## Explore logs
-Via `oc logs` ,  `kubectl logs` or via console.
+Via `oc logs` ,  `kubectl logs` or via web console.
 
 
 ## Explore console
-Via `oc exec`, `kubectl exec` or via console.
+Via `oc exec`, `kubectl exec` or via web console.
+
 What is the user id used for the pods? (use the `id` command for this)
 
 ## Portforwarding - to see yourself
-Some times it is useful to be able to see directly what is going, unfiltered.
+Sometimes it's useful to be able to see directly what is going, unfiltered.
 
 `oc port-forward` can help you with that.
 
-What port is the productpage available on via the productpage service? (look in yaml, cli or console...)
+What port is the productpage available on via the productpage service? (look in yaml, cli or web console...)
 
 Get the productpage available via the service locally on your desktop. Use:
 `oc port-forward service/productpage xxxx:yyyy`
