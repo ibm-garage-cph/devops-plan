@@ -1,4 +1,4 @@
-# Introduction - metrics with sysdig
+# Introduction - metrics with Sysdig
 
 Here you will find the instructions for setting up the environment we are going to work with during the week.
 
@@ -20,25 +20,27 @@ Traffic			Demand is being placed on your system
 Errors			The rate of requests that fail
 Saturation 		How “full” your service is.
 ```
-This is just to remind about what we are after here, as one of the key elements from metrics.
+
+This is just to remind ourselves about what we are after here, as the key metrics elements.
 
 ## Sysdig and metrics
-Sysdig service is already set for this bootcamp. You can find it under [observability -> monitoring](https://cloud.ibm.com/observe/monitoring)
+The Sysdig service is already set for this bootcamp. You can find it under [observability -> monitoring](https://cloud.ibm.com/observe/monitoring)
 
 ### How it is setup for ROKS
 The way it is setup for the ROKS cluster you can see clicking on *Edit log sources* under Sources. 
 
-Have a look at what does it (the deployment) actually do, recalling how logdna did might be helpful. Where is the configuration for the agents stored? What namespace is used? Where is the data sent to? How is it identified for the instance? What does the agent capture?
+Have a look at what does it (the deployment) actually do; recalling how/what logdna did might be helpful. Where is the configuration for the agents stored? What namespace is used? Where is the data sent to? How is it identified for the instance? What does the agent capture?
 
 Explore the file (suggest to use curl - but this is not needed).
 How is the *configmap* (and secret) mapped into the pods?
 
-How does the actual DaemonSet-declaration look like on the ROKS cluster?
+How does the actual DaemonSet declaration look like on the ROKS cluster?
 
-Can you see the output from the console of one of the sysidg pods either on CLI or webconsole?
+Can you see the output from the console of one of the Sysdig pods either on CLI or webconsole?
 
 ### Sysdig console
 Now find the same information in the sysidg console.
+
 Start here: Sysdig service is already set for this bootcamp. You can find it under [observability -> monitoring](https://cloud.ibm.com/observe/monitoring)
 
 Select the *View Sysdig* under View dashboard.
@@ -50,14 +52,13 @@ On the left side you should see Overview, Explore, Dashboard etc..
 #### Overview
 Suggest to have a view on `Nodes` does the load look fair on the nodes?
 
-Look also under `Workloads` select your own namespace. There you should be able to see all of your deployments (expect no StatefulSet or DaemonSet).
+Look also under `Workloads` and select your own namespace. There you should be able to see all of your deployments (expect no StatefulSet or DaemonSet).
 
 
 #### Dashboards
-Suggest search for the "Golden Signals". WHere do you find it?
+Suggest search for the "Golden Signals". Where do you find it?
 
 You may also look for the HTTP views.
-
 
 #### Generate some load
 GO back to the golden signals and generate some load....
