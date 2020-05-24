@@ -20,7 +20,7 @@ Look at the material from before, or ask a fellow student in case you need a mem
 
 When logged-in, ensure you can do `oc get nodes` like in the example below:
 ```bash
-$ oc get nodes
+oc get nodes
 NAME             STATUS   ROLES           AGE   VERSION
 10.215.133.195   Ready    master,worker   22d   v1.16.2
 10.215.133.206   Ready    master,worker   22d   v1.16.2
@@ -63,7 +63,7 @@ Previously you had a bookinfo url that was based on a path like `http://hostname
 
 The files to setup the project are found in this folder.
 What do you need to change before applying below? (Hint: Check before doing each command and reflect on what does each line actually do for the project? Is there anything you need to change before running the command? Are environment variables interpreted inside yaml files?)
-```
+```bash
 git clone https://github.com/ibm-garage-cph/devops-plan.git
 cd devops-plan/01-basis
 
