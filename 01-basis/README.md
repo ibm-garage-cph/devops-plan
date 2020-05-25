@@ -29,7 +29,7 @@ NAME             STATUS   ROLES           AGE   VERSION
 
 ## Get the Ingress domain
 All URLs in the rest of the bootcamp relates to the ingress domain of the ROKS cluster. Suggest to extract it and store it in your `.env` file.
-You can find it with `ic ks cluster get -c roks-bootcamp`
+You can find it with `ibmcloud ks cluster get -c roks-bootcamp`
 
 Suggest to fill enviromment variable `INGRESS_SUBDOMAIN` with the value like:
 
